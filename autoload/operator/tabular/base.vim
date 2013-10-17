@@ -10,6 +10,10 @@ let s:base = {
 let s:debug = 1
 let s:logs = []
 
+if s:debug
+  command! -nargs=0 TabularDebugLog echo join(s:logs, "\n")
+endif
+
 function! s:base.new() "{{{2
   return extend({}, self)
 endfunction
