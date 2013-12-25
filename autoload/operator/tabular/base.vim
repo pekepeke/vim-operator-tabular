@@ -122,7 +122,7 @@ function! s:base.untabularize_tsv(motion_wise) "{{{3
 endfunction
 
 function! s:base.untabularize_csv(motion_wise) "{{{3
-  return self.untabularize(a:motion_wise, csvutil#tsv_writer())
+  return self.untabularize(a:motion_wise, csvutil#csv_writer())
 endfunction
 
 " Interface "{{{1
