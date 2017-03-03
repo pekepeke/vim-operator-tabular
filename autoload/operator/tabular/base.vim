@@ -7,7 +7,7 @@ let s:base = {
       \ '_layout' : [],
       \ '_lines': [],
       \ }
-let s:debug = 1
+let s:debug = 0
 let s:logs = []
 
 if s:debug
@@ -25,8 +25,12 @@ function! s:base.log(...) "{{{2
 endfunction
 
 function! s:base.preprocess(lines) "{{{2
-  let self._lines = copy(a:lines)
-  call self.calc(a:lines)
+  let self._lines = map(copy(a:lines), 'map(v:val, "self.convert_item(v:val)")')
+  call self.calc(self._lines)
+endfunction
+
+function! s:base.convert_item(line) "{{{2
+  return a:line
 endfunction
 
 function! s:base.calc(lines) "{{{2

@@ -7,6 +7,10 @@ function! s:instance.new() "{{{2
   return extend({}, self)
 endfunction
 
+function! s:instance.convert_item(item) "{{{2
+  return " " . a:item . " "
+endfunction
+
 function! s:instance.render(lines) "{{{2
   call self.log("preprocess start")
   call self.preprocess(a:lines)
@@ -38,6 +42,7 @@ function! s:instance.restore_from_lines(buflines) "{{{2
 endfunction
 
 function! s:instance.mdcolumn2tsv(line) "{{{2
+  call map(a:line, 'substitute(v:val, "^ \\| $", "", "")')
   return map(a:line, 'substitute(v:val, "<br\\s*/\\?>", "\\n", "i")')
 endfunction
 
